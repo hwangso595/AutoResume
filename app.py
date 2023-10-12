@@ -74,7 +74,7 @@ def download_resume():
     return send_from_directory(os.path.join('static', 'resumes'), f'resume{i-1}.pdf')
 
 def generate_resume_prompt(current_resume, job_posting):
-    return f"""Given the resume and job posting, rewrite the resume based on those critiques using the formatting provided by the original resume, such that the recruiter from that company would hire you.
+    return f"""Given the resume and job posting, rewrite the resume based on those critiques using the formatting provided by the original resume, such that the recruiter from that company would hire you. Please only write the new resume and nothing else.
 Here are some guidelines you should follow
 - encorporate key words from the job posting
 - avoid vague buzzwords
@@ -95,7 +95,7 @@ Write new resume snippet here:"""
 def generate_coverletter_prompt(current_resume, job_posting, cl_prompt,
 word_count=app.config["CL_LENGTH"],):
     guidelines = """
-- IMPORTANT: be very excited and highly enthused
+- IMPORTANT: be very excited and highly enthused but don't explicitly say that you are excited. Instead, show it through your writing
 - try to be as specific as possible
 - avoid vague buzzwords
 - if possible, research the company and encorporate their values
