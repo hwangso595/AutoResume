@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+  <title>OpenAI Quickstart</title>
+  <link
+    rel="shortcut icon"
+    href="{{ url_for('static', filename='dog.png') }}"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+</head>
+
+<body>
+  <img src="{{ url_for('static', filename='dog.png') }}" class="icon" />
+  <h3>Resume Generator</h3>
+  <form class="generate-form" action="/" method="post">
+    <div class="input-texts">
+      <textarea
+        class="grow"
+        name="resume"
+        placeholder="Enter your resume (.tex prefered. Add %---% before and after the area you want AI to edit)"
+        required
+      >
+{{ base_resume }}</textarea
+      >
+      <textarea
+        class="grow"
+        name="posting"
+        placeholder="Enter the job posting"
+        required
+      ></textarea>
+      <div class="grow cl-inputs">
+        <input type="checkbox" name="generate-cl" value="false" />Generate
+        Coverletter
+        <textarea
+          name="cl-prompt"
+          placeholder="Enter prompt"
+          class="fill-height"
+        ></textarea>
+      </div>
+    </div>
+    <input type="submit" value="Generate Resume" />
+  </form>
+  <div class="result-box">
+    {% if error %}
+    <div class="result-item">
+      <h2>Error</h2>
+      <div class="grow result-text">{{ error }}</div>
+    </div>
+    {% endif %} {% if resume %}
+    <div class="result-item">
+      <h2>Resume</h2>
+      <form target="_blank" class="grow download-form" action="/resume" method="post">
+        <textarea name="resume" class="grow result-text">{{ resume|safe }}</textarea>
+        <input type="submit" value="Download Resume latex > pdf" />
+      </form>
+    </div>
+    {% endif %} {% if coverletter %}
+    <div class="result-item">
+      <h2>Coverletter</h2>
+      <textarea class="grow result-text">{{ coverletter|safe }}</textarea>
+    </div>
+    {% endif %}
+  </div>
+  <script>
+    // loading gif when generate resume is clicked
+    const generateForm = document.querySelector(".generate-form");
+    const loadingGif = document.createElement("img");
+    loadingGif.src = "{{ url_for('static', filename='loading.gif') }}";
+    loadingGif.classList.add("loading-gif");
+    generateForm.addEventListener("submit", () => {
+      generateForm.appendChild(loadingGif);
+    });
+  </script>
+</body>
