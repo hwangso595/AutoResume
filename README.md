@@ -5,7 +5,7 @@ This app creates a resume and a cover letter tailored to a given job posting and
 ## Setup
 
 1. If you don’t have Python installed, [install it from here](https://www.python.org/downloads/).
-2. Install pdflatex https://tug.org/applications/pdftex/
+2. Install texlive https://tug.org/texlive/
 
 3. Clone this repository.
 

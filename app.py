@@ -74,14 +74,13 @@ def download_resume():
     return send_from_directory(os.path.join('static', 'resumes'), f'resume{i-1}.pdf')
 
 def generate_resume_prompt(current_resume, job_posting):
-    return f"""Given the resume and job posting, rewrite the resume based on those critiques using the formatting provided by the original resume, such that the recruiter from that company would hire you. Please only write the new resume and nothing else.
+    return f"""Given the resume and job posting, rewrite the resume using the formatting provided by the original resume, such that the recruiter from that company would hire you. Please only write the new resume and nothing else.
 Here are some guidelines you should follow
 - encorporate key words from the job posting
 - avoid vague buzzwords
 - add as much details and metrics as possible
-- don't add additional sections like name or work experience
-- don't add elements in the skills section if it is not referenced in one of the work experiences. You may add skills if they you reference them in one of the experiences in the resume.
-- emballish if necessary
+- embellish if necessary
+- add skills if it is referenced in the job posting
 
 Resume:
 {current_resume}
@@ -95,13 +94,13 @@ Write new resume snippet here:"""
 def generate_coverletter_prompt(current_resume, job_posting, cl_prompt,
 word_count=app.config["CL_LENGTH"],):
     guidelines = """
-- IMPORTANT: be very excited and highly enthused but don't explicitly say that you are excited. Instead, show it through your writing
+- IMPORTANT: be very excited and highly enthused but don't mention the words excited or synonymous words. Instead, show it through your writing
 - try to be as specific as possible
 - avoid vague buzzwords
 - if possible, research the company and encorporate their values
 - encorporate literary devices but don't overdo it
 - encorporate key words from the job posting
-- have high degree of perplexity and robustness
+- have high degree of perplexity and burstiness
 - tell a personal story and relate it to the job or company
 """
     result = f""" Given the resume, job posting, and prompt, write a {word_count} word cover letter for this job that answers the prompt. The resume is written in latex.
