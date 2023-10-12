@@ -19,7 +19,8 @@
         placeholder="Enter your resume (.tex prefered. Add %---% before and after the area you want AI to edit)"
         required
       >
-{{ base_resume }}</textarea
+{% if base_resume %}
+{{ base_resume }}{% endif %}</textarea
       >
       <textarea
         class="grow"
@@ -48,8 +49,15 @@
     {% endif %} {% if resume %}
     <div class="result-item">
       <h2>Resume</h2>
-      <form target="_blank" class="grow download-form" action="/resume" method="post">
-        <textarea name="resume" class="grow result-text">{{ resume|safe }}</textarea>
+      <form
+        target="_blank"
+        class="grow download-form"
+        action="/resume"
+        method="post"
+      >
+        <textarea name="resume" class="grow result-text">
+{{ resume|safe }}</textarea
+        >
         <input type="submit" value="Download Resume latex > pdf" />
       </form>
     </div>
@@ -68,6 +76,16 @@
     loadingGif.classList.add("loading-gif");
     generateForm.addEventListener("submit", () => {
       generateForm.appendChild(loadingGif);
+    });
+    // disable cover letter prompt if generate cover letter is not checked
+    const generateCl = document.querySelector("input[name='generate-cl']");
+    const clPrompt = document.querySelector("textarea[name='cl-prompt']");
+    generateCl.addEventListener("change", () => {
+      if (generateCl.checked) {
+        clPrompt.disabled = false;
+      } else {
+        clPrompt.disabled = true;
+      }
     });
   </script>
 </body>

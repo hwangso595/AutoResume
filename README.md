@@ -44,3 +44,11 @@ This app creates a resume and a cover letter tailored to a given job posting and
    ```
 
 You should now be able to access the app at [http://localhost:5000](http://localhost:5000)
+
+### Usage
+Enter your current resume and job posting. If you would like to generate a coverletter,
+check the "Generate cover letter" check box and enter in the cover letter prompt (it's ok to leave empty).
+Finally, press the "Generate Resume" buttom to generate the tailored resume (and coverletter).
+
+Note: you can change the model, cover letter word count, and resume delimiter in config.json
+With the current configuration, each pair of resume/coverletter costs < $0.01
