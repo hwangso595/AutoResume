@@ -74,7 +74,7 @@ def download_resume():
     return send_from_directory(os.path.join('static', 'resumes'), f'resume{i-1}.pdf')
 
 def generate_resume_prompt(current_resume, job_posting):
-    return f"""Given the resume and job posting, critique this resume as if you were a recruiter from that company. Then, rewrite the resume based on those critiques using the latex format provided by the resume.
+    return f"""Given the resume and job posting, critique this resume as if you were a recruiter from that company. Then, rewrite the resume based on those critiques using the formatting provided by the original resume.
 Here are some guidelines you should follow
 - encorporate key words from the job posting
 - avoid vague buzzwords
